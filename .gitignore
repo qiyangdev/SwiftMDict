@@ -1,8 +1,16 @@
 .DS_Store
 /.build
+/.swiftpm-home/
 /Packages
 xcuserdata/
 DerivedData/
-.swiftpm/configuration/registries.json
-.swiftpm/xcode/package.xcworkspace/contents.xcworkspacedata
+/.swiftpm/
 .netrc
+
+# Nested example build products
+/Examples/*/.build/
+/Examples/*/.swiftpm/
+/Examples/*/.swiftpm-home/
+
+# Local integration-test dictionaries
+/Tests/oxfordstu_no_audio/

@@ -1,33 +1,38 @@
-// swift-tools-version: 6.4
-// The swift-tools-version declares the minimum version of Swift required to build this package.
+// swift-tools-version: 6.0
 
 import PackageDescription
 
 let package = Package(
-    name: "SwiftMDict",
-    products: [
-        // Products define the executables and libraries a package produces, making them visible to other packages.
-        .library(
-            name: "SwiftMDict",
-            targets: ["SwiftMDict"]
-        ),
-    ],
-    targets: [
-        // Targets are the basic building blocks of a package, defining a module or a test suite.
-        // Targets can depend on other targets in this package and products from dependencies.
-        .target(
-            name: "SwiftMDict",
-            swiftSettings: [
-                .enableUpcomingFeature("ApproachableConcurrency"),
-            ],
-        ),
-        .testTarget(
-            name: "SwiftMDictTests",
-            dependencies: ["SwiftMDict"],
-            swiftSettings: [
-                .enableUpcomingFeature("ApproachableConcurrency"),
-            ],
-        ),
-    ],
-    swiftLanguageModes: [.v6]
+  name: "SwiftMDict",
+  platforms: [
+    .iOS(.v15),
+    .macOS(.v12),
+    .tvOS(.v15),
+    .watchOS(.v8),
+    .visionOS(.v1),
+  ],
+  products: [
+    .library(
+      name: "SwiftMDict",
+      targets: ["SwiftMDict"]
+    )
+  ],
+  targets: [
+    .systemLibrary(
+      name: "CZlib",
+      providers: [
+        .apt(["zlib1g-dev"]),
+        .brew(["zlib"]),
+      ]
+    ),
+    .target(
+      name: "SwiftMDict",
+      dependencies: ["CZlib"]
+    ),
+    .testTarget(
+      name: "SwiftMDictTests",
+      dependencies: ["SwiftMDict", "CZlib"]
+    ),
+  ],
+  swiftLanguageModes: [.v6]
 )

@@ -1,0 +1,11 @@
+SwiftMDict
+Copyright 2026 SwiftMDict contributors
+
+The LZO1X decoder in Sources/SwiftMDict/LZO.swift is adapted from
+Aircompressor's LzoRawDecompressor:
+
+  https://github.com/airlift/aircompressor
+
+Copyright 2019 Airlift authors.
+Licensed under the Apache License, Version 2.0. A copy of that license is
+provided in LICENSES/Apache-2.0.txt.
