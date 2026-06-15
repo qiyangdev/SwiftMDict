@@ -57,17 +57,9 @@ struct BinaryReader {
 
   mutating func readUInt64BE() throws -> UInt64 {
     try require(8)
-    let value =
-      (UInt64(data[offset]) << 56)
-      | (UInt64(data[offset + 1]) << 48)
-      | (UInt64(data[offset + 2]) << 40)
-      | (UInt64(data[offset + 3]) << 32)
-      | (UInt64(data[offset + 4]) << 24)
-      | (UInt64(data[offset + 5]) << 16)
-      | (UInt64(data[offset + 6]) << 8)
-      | UInt64(data[offset + 7])
-    offset += 8
-    return value
+    let high = UInt64(try readUInt32BE())
+    let low = UInt64(try readUInt32BE())
+    return (high << 32) | low
   }
 
   mutating func readData(count: Int) throws -> Data {

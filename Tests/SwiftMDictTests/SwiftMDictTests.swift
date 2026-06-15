@@ -478,14 +478,9 @@ extension Array where Element == UInt8 {
   }
 
   fileprivate func readUInt64BE(at offset: Int) -> UInt64 {
-    (UInt64(self[offset]) << 56)
-      | (UInt64(self[offset + 1]) << 48)
-      | (UInt64(self[offset + 2]) << 40)
-      | (UInt64(self[offset + 3]) << 32)
-      | (UInt64(self[offset + 4]) << 24)
-      | (UInt64(self[offset + 5]) << 16)
-      | (UInt64(self[offset + 6]) << 8)
-      | UInt64(self[offset + 7])
+    let high = UInt64(readUInt32BE(at: offset))
+    let low = UInt64(readUInt32BE(at: offset + 4))
+    return (high << 32) | low
   }
 
   fileprivate mutating func writeUInt32BE(_ value: UInt32, at offset: Int) {
